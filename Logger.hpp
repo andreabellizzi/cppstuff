@@ -5,6 +5,8 @@
 #include <mutex>
 #include <Singleton.hpp>
 
+namespace Logging {
+
 class Logger : public Singleton<Logger> {
     friend class Singleton<Logger>; // (CRTP) curiously recurring template pattern, needed because Singleton<T> creates T, in this case Logger, but Logger constructor is private, so Singleton<Logger> need to access it
  
@@ -32,10 +34,10 @@ public:
 private:
     Logger() : 
         commonFmt(""),
+        debugFmt("[DEBUG] "),
         infoFmt("[INFO] "),
         warnFmt("[WARN] "),
         errorFmt("[ERROR] "),
-        debugFmt("[DEBUG] "),
         _logLevel(Logger::LogLevel::ERROR) {
             //enabling exception
             logFile.exceptions(std::ofstream::failbit | std::ofstream::badbit);
@@ -50,7 +52,7 @@ private:
     bool _logToConsole = true;
     bool _logToFile    = false;
     std::recursive_mutex _mtx;
-    const std::string buildFinalMsg(const std::string& msg, const std::string& fmt) const;
+    std::string buildFinalMsg(const std::string& msg, const std::string& fmt) const;
     void logToFile(const std::string& msg);
     void logToConsole(const std::string& msg);
     void openLogFile(const std::string& file);
@@ -62,3 +64,5 @@ private:
     };
 };
 
+extern Logger* Log;
+}
