@@ -13,6 +13,7 @@ int main() {
     Logging::Log = &Logging::Logger::instance();
     Logging::Log->setLogToConsole(true);
     Logging::Log->setLogToFile(true);
+    Logging::Log->setFormat("[%(level)][%(file):%(func):%(lineno)][%(time)]-%(msg)");
     Logging::Log->setLogLevel(Logging::Logger::LogLevel::WARNING);
     Logging::Log->setLogFile("trylog.txt");
     Logging::Log->info("try info");
