@@ -1,8 +1,13 @@
 #include <Logger.hpp>
 #include <exception>
 
+namespace Logging {
+    Logger* Log;
+}
 
-const std::string Logger::buildFinalMsg(const std::string& msg, const std::string& fmt) const 
+using namespace Logging;
+
+std::string Logger::buildFinalMsg(const std::string& msg, const std::string& fmt) const 
 {
     return fmt + msg + commonFmt;
 }
