@@ -8,6 +8,8 @@
 #include <map>
 #include <Singleton.hpp>
 
+
+// TODO: refactor avoid using always std::vector
 namespace Logging {
 
 class Logger; //forward declaration to declare extern global Log at the start of header and make it more visible
